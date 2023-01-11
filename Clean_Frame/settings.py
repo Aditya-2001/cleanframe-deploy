@@ -87,29 +87,32 @@ WSGI_APPLICATION = 'Clean_Frame.wsgi.application'
 # DATABASE HOSTING LINKS
 # SMARTET_ASP.NET
 
-# USERNAME - cleanframe
-# PASSWORD - cleanframe123@
+DATABASES = {  
+    'default': {  
+        'ENGINE': 'django.db.backends.mysql',  
+        'NAME': 'cleanframe',  
+        'USER': 'cleanframe',  
+        'PASSWORD': 'akaad@123',  
+        'HOST': 'clean-frame.mysql.database.azure.com', 
+    }  
+} 
 
-# DATABASES = {  
-#     'default': {  
-#         'ENGINE': 'django.db.backends.mysql',  
-#         'NAME': 'db_a83e35_intern',  
-#         'USER': 'a83e35_intern',  
-#         'PASSWORD': 'cleanframeDB123@',  
-#         'HOST': 'MYSQL5045.site4now.net',  
-#         # 'PORT': '3306',  
-#         'OPTIONS': {  
-            
-#         }  
-#     }  
-# } 
+# DATABASES = {
+#     'default': {
+#          'ENGINE': 'mssql',
+#          'Trusted_Connection': 'no', 
+#          'OPTIONS': { 
+#              'driver': 'ODBC Driver 17 for SQL Server', 
+#              'extra_params': "Authentication=ActiveDirectoryMsi;Encrypt=yes;TrustServerCertificate=no" }
+#      }
+# }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': str(BASE_DIR / 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -158,18 +161,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'cleanframeiiit@gmail.com'
-EMAIL_HOST_PASSWORD = 'clean_frame'
+EMAIL_HOST_USER = 'djangonotification@gmail.com'
+EMAIL_HOST_PASSWORD = 'ykufsucjhixlgcru'
 
-PHONE_ACCOUNT_SID_TWILIO = 'AC664c999bbd47f05aaf38b3e6e3ef03b8'
-PHONE_ACCOUNT_AUTH_TOKEN_TWILIO = '5d8023dfc538060aa968afe037b637ec'
-PHONE_NUMBER_TWILIO = '+17737565047'
+PHONE_ACCOUNT_SID_TWILIO = 'ACbef25a8219317fe5d2c257e56ca6b54b'
+PHONE_ACCOUNT_AUTH_TOKEN_TWILIO = 'b19fedab8387052ef53038a32117bd94'
+PHONE_NUMBER_TWILIO = '+19704602218'
 
 OTP_EXPIRE_TIME=16
 COMPANY_MESSAGE='This_is_a_company_Associated_account'
 SEPARATOR='**'
 
-BASE_URL="http://127.0.0.1:8000"
+# BASE_URL="http://127.0.0.1:8000"
+BASE_URL="https://cleanframe.azurewebsites.net"
 # BASE_URL="https://clean-frame.herokuapp.com"
 
 TEMORARY_BAN_TIME=30

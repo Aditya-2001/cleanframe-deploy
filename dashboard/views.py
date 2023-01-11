@@ -164,15 +164,15 @@ def send_otp_to_phone_stu(request):
             phone_number=request.POST.get('contact_number')
             address=request.POST.get('address')
             gender=request.POST.get('gender')
-            if StudentProfile.objects.filter(contact_number=int(phone_number),profile_filled=True).count() >= 1:
+            if StudentProfile.objects.filter(contact_number=str(phone_number),profile_filled=True).count() >= 1:
                 return profile_i(request,'Account with given mobile number already exists')
-            if CompanyProfile.objects.filter(contact_number=int(phone_number),profile_filled=True).count() >= 1:
+            if CompanyProfile.objects.filter(contact_number=str(phone_number),profile_filled=True).count() >= 1:
                 return profile_i(request,'Account with given mobile number already exists')
             if(otp_sender_to_student(request, phone_number)==False):
                 return redirect('dashboard')
             try:
                 p=StudentProfile.objects.get(user=request.user)
-                p.contact_number=int(phone_number)
+                p.contact_number=str(phone_number)
                 p.complete_address=address
                 if str(gender)=='1':
                     p.gender='Male'
@@ -183,7 +183,8 @@ def send_otp_to_phone_stu(request):
                 p.save()
                 data=get_my_profile(request)
                 return render(request,'dashboard/profile.html',context={"phase": 2, "phone": phone_number, "permissions": get_permissions(request), "data": data})
-            except:
+            except Exception as e:
+                print(e)
                 return redirect('dashboard')
         else:
             return redirect('dashboard')
@@ -205,7 +206,8 @@ def otp_sender_to_student(request, phone_number):
         u.otp=str(otp)
         u.otp_time=datetime.datetime.now()
         u.save()
-    except:
+    except Exception as e:
+        print(e)
         return False
     return True
 
@@ -270,15 +272,15 @@ def send_otp_to_phone_com(request):
         if request.method=="POST":
             phone_number=request.POST.get('contact_number')
             address=request.POST.get('address')
-            if StudentProfile.objects.filter(contact_number=int(phone_number),profile_filled=True).count() >= 1:
+            if StudentProfile.objects.filter(contact_number=str(phone_number),profile_filled=True).count() >= 1:
                 return profile_i(request,'Account with given mobile number already exists')
-            if CompanyProfile.objects.filter(contact_number=int(phone_number),profile_filled=True).count() >= 1:
+            if CompanyProfile.objects.filter(contact_number=str(phone_number),profile_filled=True).count() >= 1:
                 return profile_i(request,'Account with given mobile number already exists')
             if(otp_sender_to_company(request, phone_number)==False):
                 return redirect('dashboard')
             try:
                 p=CompanyProfile.objects.get(user=request.user)
-                p.contact_number=int(phone_number)
+                p.contact_number=str(phone_number)
                 p.complete_address=address
                 p.save()
                 data=get_my_profile(request)
@@ -520,9 +522,9 @@ def student_company_number(request):
     if request.user.is_authenticated:
         if request.method=="POST":
             phone_number=request.POST.get('contact_number')
-            if StudentProfile.objects.filter(contact_number=int(phone_number),profile_filled=True).count() >= 1:
+            if StudentProfile.objects.filter(contact_number=str(phone_number),profile_filled=True).count() >= 1:
                 return profile_i(request,'Account with given mobile number already exists')
-            if CompanyProfile.objects.filter(contact_number=int(phone_number),profile_filled=True).count() >= 1:
+            if CompanyProfile.objects.filter(contact_number=str(phone_number),profile_filled=True).count() >= 1:
                 return profile_i(request,'Account with given mobile number already exists')
             u=User.objects.get(username=request.user)
             if u.last_name==settings.COMPANY_MESSAGE:
@@ -533,7 +535,7 @@ def student_company_number(request):
                 if(otp_sender_to_student(request, phone_number)==False):
                     return redirect('dashboard')
                 p=StudentProfile.objects.get(user=request.user)
-            p.contact_number=int(phone_number)
+            p.contact_number=str(phone_number)
             p.profile_filled=False
             p.save()
             data=get_my_profile(request)

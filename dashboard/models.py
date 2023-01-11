@@ -33,7 +33,7 @@ class StaffPermissions(models.Model):
             return 'NILL'
 
 class Session(models.Model):
-    name=models.CharField(max_length=16383, null=True)
+    name=models.TextField()
     active=models.BooleanField(default=True)
     created_on=models.DateTimeField(default=datetime.datetime.now())
 
@@ -43,12 +43,12 @@ class Session(models.Model):
 class Internship(models.Model):
     session=models.ForeignKey(Session, on_delete=models.SET_NULL, null=True, blank=True)
     company=models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    internship_name=models.CharField(max_length=16383, null=True)
+    internship_name=models.TextField()
     stipend=models.FloatField(default=0, null=True)
     internship_duration=models.IntegerField(default=0, null=True)
-    internship_position=models.CharField(max_length=16383, null=True)
+    internship_position=models.TextField()
     minimum_cgpa=models.FloatField(default=5.0, null=True)
-    prerequisite=models.CharField(max_length=16383, null=True)
+    prerequisite=models.TextField()
     result_announced=models.BooleanField(default=False)
 
     def __str__(self):
@@ -78,15 +78,15 @@ class CompanyAnnouncement(models.Model):
     internship=models.ForeignKey(Internship, on_delete=models.CASCADE, null=True, blank=True)
     company=models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     general_announcement=models.BooleanField(default=False)
-    internship_round=models.CharField(max_length=16383, null=True)
-    round_name=models.CharField(max_length=16383, null=True)
+    internship_round=models.TextField()
+    round_name=models.TextField()
     first_round=models.BooleanField(default=False)
     last_round=models.BooleanField(default=False)
     last_round_result_announced=models.BooleanField(default=False)
-    prev_round_for_result=models.CharField(max_length=16383, null=True)
+    prev_round_for_result=models.TextField()
     last_date_to_apply=models.DateTimeField(default=datetime.datetime.now())
     announcement_date=models.DateTimeField(default=datetime.datetime.now())
-    message=models.CharField(max_length=16383)
+    message=models.TextField()
     file=models.FileField(upload_to='post_files/', null=True, blank=True)
     file_for_prev_result=models.FileField(upload_to='post_files/', null=True, blank=True)
 
@@ -142,8 +142,8 @@ class ProfilePermissions(models.Model):
                 return "NIL"
 
 class Blog(models.Model):
-    title=models.CharField(max_length=16383)
-    short_description=models.CharField(max_length=16383)
+    title=models.TextField()
+    short_description=models.TextField()
     brief_description=models.TextField()
     image=models.ImageField(upload_to='post_images/', null=True, blank=True)
     date_of_announcement=models.DateTimeField(auto_now=True)
@@ -172,7 +172,7 @@ class Notification(models.Model):
 
 class ChatRequest(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="customer")
-    message=models.CharField(max_length=16383, null=True)
+    message=models.TextField()
     message_time=models.DateTimeField(default=datetime.datetime.now())
     chat_ended=models.BooleanField(default=False)
     engaged=models.BooleanField(default=False)
@@ -181,10 +181,10 @@ class ChatRequest(models.Model):
 class ChatResponse(models.Model):
     chat_request=models.ForeignKey(ChatRequest, on_delete=models.CASCADE, null=True)
     responder=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    username=models.CharField(max_length=16383, blank=True, null=True)
-    message=models.CharField(max_length=16383, null=True)
+    username=models.TextField()
+    message=models.TextField()
     message_time=models.DateTimeField(default=datetime.datetime.now())
-    mess_time_str=models.CharField(max_length=16383, null=True)
+    mess_time_str=models.TextField()
     read=models.BooleanField(default=False)
     read_s=models.BooleanField(default=False)
 
