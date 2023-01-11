@@ -94,6 +94,7 @@ DATABASES = {
         'USER': 'cleanframe',  
         'PASSWORD': 'akaad@123',  
         'HOST': 'clean-frame.mysql.database.azure.com', 
+        'ssl-mode' : 'require'
     }  
 } 
 
