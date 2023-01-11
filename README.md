@@ -1,1 +1,1 @@
-# cleanframe-deploy
+Deploying the server to azure
