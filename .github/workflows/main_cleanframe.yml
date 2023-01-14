@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'cleanframe'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FB0C8B205EFA4E2FA66AA4A9D616FF60 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E201BC2BD7A6416785E7A0CE880EC455 }}
