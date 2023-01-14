@@ -156,7 +156,32 @@ def profile_i(request,error):
         except:
             p={}
     data=get_my_profile(request)
-    return render(request,'dashboard/profile.html',context={"contact_given": contact_given, "phase": 1, "data": p, "error": error, "permissions": get_permissions(request), "data": data})
+    return render(request,'dashboard/profile.html',context={"contact_given": contact_given, "phase": 1, "data": p, "error": error, "permissions": get_permissions(request), "data": data, "SKIP_PHONE_NUMBER_FIELD_PROFILE": settings.SKIP_PHONE_NUMBER_FIELD_PROFILE})
+
+def skip_profile_phonenumber(request):
+    if not settings.SKIP_PHONE_NUMBER_FIELD_PROFILE:
+        return redirect('dashboard')
+    if request.user.is_authenticated:
+        try:
+            p=StudentProfile.objects.get(user=request.user)
+            p.contact_number=""
+            p.profile_filled=True
+            p.save()
+            data=get_my_profile(request)
+            return render(request,'dashboard/profile.html',context={"phase": 2, "phone": phone_number, "permissions": get_permissions(request), "data": data})
+        except:
+            try:
+                p=CompanyProfile.objects.get(user=request.user)
+                p.contact_number=""
+                p.profile_filled=True
+                p.save()
+                data=get_my_profile(request)
+                return render(request,'dashboard/profile.html',context={"phase": 2, "phone": phone_number, "permissions": get_permissions(request), "data": data})
+            except Exception as e:
+                print(e)
+                return redirect('dashboard')
+    else:
+        return redirect('home')
 
 def send_otp_to_phone_stu(request):
     if request.user.is_authenticated:

@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '--xx0xo$(1r7tv&i6281qx+3dcvt_+ygojio)3)!^$m-jd2@uk'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,22 +90,12 @@ WSGI_APPLICATION = 'Clean_Frame.wsgi.application'
 DATABASES = {  
     'default': {  
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'cleanframe',  
-        'USER': 'cleanframe',  
-        'PASSWORD': 'akaad@123',  
-        'HOST': 'clean-frame.mysql.database.azure.com', 
+        'NAME': os.environ["DATABASE_NAME"],  
+        'USER': os.environ["DATABASE_USER"],  
+        'PASSWORD': os.environ["DATABASE_PASSWORD"],  
+        'HOST': os.environ["DATABASE_HOST"], 
     }  
 } 
-
-# DATABASES = {
-#     'default': {
-#          'ENGINE': 'mssql',
-#          'Trusted_Connection': 'no', 
-#          'OPTIONS': { 
-#              'driver': 'ODBC Driver 17 for SQL Server', 
-#              'extra_params': "Authentication=ActiveDirectoryMsi;Encrypt=yes;TrustServerCertificate=no" }
-#      }
-# }
 
 # DATABASES = {
 #     'default': {
@@ -161,23 +151,25 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'djangonotification@gmail.com'
-EMAIL_HOST_PASSWORD = 'ykufsucjhixlgcru'
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
 
-PHONE_ACCOUNT_SID_TWILIO = 'ACbef25a8219317fe5d2c257e56ca6b54b'
-PHONE_ACCOUNT_AUTH_TOKEN_TWILIO = 'b19fedab8387052ef53038a32117bd94'
-PHONE_NUMBER_TWILIO = '+19704602218'
+PHONE_ACCOUNT_SID_TWILIO = os.environ["PHONE_ACCOUNT_SID_TWILIO"]
+PHONE_ACCOUNT_AUTH_TOKEN_TWILIO = os.environ["PHONE_ACCOUNT_AUTH_TOKEN_TWILIO"]
+PHONE_NUMBER_TWILIO = os.environ["PHONE_NUMBER_TWILIO"]
 
-OTP_EXPIRE_TIME=16
+OTP_EXPIRE_TIME=os.environ["OTP_EXPIRE_TIME"]
 COMPANY_MESSAGE='This_is_a_company_Associated_account'
 SEPARATOR='**'
 
-# BASE_URL="http://127.0.0.1:8000"
-BASE_URL="https://cleanframe.azurewebsites.net"
-# BASE_URL="https://clean-frame.herokuapp.com"
+BASE_URL=os.environ["BASE_URL"]
+
+# http://127.0.0.1:8000
+# https://clean-frame.herokuapp.com
+# https://cleanframe.azurewebsites.net
 
 TEMORARY_BAN_TIME=30
 ENGAGED_EXPIRE_TIME=20
 
 USE_TZ=True
-
+SKIP_PHONE_NUMBER_FIELD_PROFILE = (os.environ["SKIP_PHONE_NUMBER_FIELD_PROFILE"]=="True")

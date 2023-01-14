@@ -481,6 +481,7 @@
                             </tr>
                         </table>
                         <input type="submit" class="profile_save_changes_btn" id="mybutton" value="Send OTP to phone">
+                        {% if SKIP_PHONE_NUMBER_FIELD_PROFILE %}<a href="{% url 'skip_profile_phonenumber' %}">Skip for now</a>{% endif %}
                     </form>
                 </td>
             </tr>
@@ -532,6 +533,7 @@
                             </tr>
                         </table>
                         <input type="submit" class="profile_save_changes_btn" id="mybutton" value="Send OTP to phone">
+                        {% if SKIP_PHONE_NUMBER_FIELD_PROFILE %}<a href="{% url 'skip_profile_phonenumber' %}">Skip for now</a>{% endif %}
                     </form>
                 </td>
             </tr>

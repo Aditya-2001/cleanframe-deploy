@@ -18,6 +18,7 @@ urlpatterns = [
     path('send/otp/phone/company/',send_otp_to_phone_com,name="send_otp_to_phone_com"),
     path('send/otp/phone/compnay/verify/',verify_otp_phone_com,name="verify_otp_phone_com"),
     path('resend/otp/phone/company/',resend_otp_to_phone_com,name="resend_otp_to_phone_com"),
+    path('profile/skip/phonenumber/',skip_profile_phonenumber,name="skip_profile_phonenumber"),
     
     path('permit/signup_request/student/',student_account_signup_permit,name="student_account_signup_permit"),
     path('permit/signup_request/student/<str:type>/<str:item>',student_account_signup_action,name="student_account_signup_action"),
